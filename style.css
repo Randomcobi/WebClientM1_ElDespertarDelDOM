@@ -1,0 +1,239 @@
+:root {
+    --fondo: #f7f7f8;
+    --superficie: #ffffff;
+    --borde: #e2e4e9;
+    --texto: #1f2328;
+    --texto-suave: #656d76;
+    --acento: #2563eb;
+    --acento-hover: #1d4ed8;
+    --texto-acento: #ffffff;
+    --boton: #eef0f3;
+    --boton-hover: #e1e4e8;
+    --seleccion: #dbe7ff;
+    --pista: #eef0f3;
+    --carril: #ffffff;
+    --carril-ganador: #fff3c4;
+    --meta: #9aa1ab;
+    --acierto: #15803d;
+    --fallo: #b91c1c;
+}
+
+:root.oscuro {
+    --fondo: #14161a;
+    --superficie: #1e2126;
+    --borde: #33373d;
+    --texto: #e6e8eb;
+    --texto-suave: #9aa1ab;
+    --acento: #60a5fa;
+    --acento-hover: #93c5fd;
+    --texto-acento: #10141a;
+    --boton: #2b2f36;
+    --boton-hover: #383d46;
+    --seleccion: #1e3a66;
+    --pista: #1a1d22;
+    --carril: #262a30;
+    --carril-ganador: #4a3f12;
+    --meta: #6b727c;
+    --acierto: #4ade80;
+    --fallo: #f87171;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+body {
+    margin: 0;
+    padding: 1rem;
+    background: var(--fondo);
+    color: var(--texto);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    line-height: 1.4;
+}
+
+.juego {
+    max-width: 44rem;
+    margin: 0 auto;
+    display: grid;
+    gap: 1rem;
+}
+
+.cabecera h1 {
+    margin: 0;
+}
+
+.marcador {
+    margin: 0.25rem 0 0;
+    color: var(--texto-suave);
+}
+
+.marcador span {
+    color: var(--texto);
+    font-weight: 700;
+}
+
+.panel {
+    background: var(--superficie);
+    border: 1px solid var(--borde);
+    border-radius: 0.75rem;
+    padding: 1rem;
+}
+
+.panel h2 {
+    margin: 0 0 0.5rem;
+    font-size: 1.05rem;
+}
+
+.panel h2:not(:first-child) {
+    margin-top: 1rem;
+}
+
+/* Pista */
+.pista {
+    display: grid;
+    gap: 0.5rem;
+    background: var(--pista);
+    border: 1px solid var(--borde);
+    border-radius: 0.75rem;
+    padding: 0.75rem;
+}
+
+.carril {
+    display: grid;
+    gap: 0.15rem;
+    padding: 0.25rem 0.5rem;
+    border-left: 0.35rem solid var(--color);
+    border-radius: 0.25rem;
+    background: var(--carril);
+}
+
+.carril.ganador {
+    background: var(--carril-ganador);
+}
+
+.carril-nombre {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.recorrido {
+    position: relative;
+    height: 2rem;
+    margin-right: 2.5rem;
+    border-right: 0.2rem dashed var(--meta);
+}
+
+.corredor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 1.6rem;
+    line-height: 2rem;
+}
+
+/* Botones */
+.botonera {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
+    color: var(--texto);
+    background: var(--boton);
+    border: 2px solid transparent;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.9rem;
+}
+
+button:hover:not(:disabled) {
+    background: var(--boton-hover);
+}
+
+button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+button.seleccionado {
+    border-color: var(--acento);
+    background: var(--seleccion);
+}
+
+.btn-principal {
+    margin-top: 1rem;
+    background: var(--acento);
+    color: var(--texto-acento);
+    font-weight: 700;
+}
+
+.btn-principal:hover:not(:disabled) {
+    background: var(--acento-hover);
+}
+
+/* Mensajes */
+.mensaje {
+    margin: 0;
+    font-size: 1.05rem;
+}
+
+.mensaje.acierto {
+    color: var(--acierto);
+}
+
+.mensaje.fallo {
+    color: var(--fallo);
+}
+
+.nota {
+    margin: 0;
+    color: var(--texto-suave);
+    font-size: 0.9rem;
+}
+
+/* Formulario y clasificación */
+.form-ranking {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    margin-top: 0.75rem;
+}
+
+.form-ranking .btn-principal {
+    margin-top: 0;
+}
+
+.form-ranking input {
+    font: inherit;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--borde);
+    background: var(--fondo);
+    color: var(--texto);
+}
+
+.ranking {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+.ranking:empty {
+    display: none;
+}
+
+.ranking li {
+    padding: 0.15rem 0;
+}
+
+@media (max-width: 30rem) {
+    .btn-principal {
+        width: 100%;
+    }
+}

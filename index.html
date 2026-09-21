@@ -1,11 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Practica1</title>
+    <title>Derby del DOM</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <main class="juego">
+        <header class="cabecera">
+            <h1>Derby del DOM</h1>
+            <p class="marcador">
+                Ronda <span id="ronda">1</span>/5 ·
+                Monedas <span id="monedas">100</span> ·
+                Racha <span id="racha">0</span>
+            </p>
+        </header>
 
+        <section id="pista" class="pista" aria-label="Pista de carreras"></section>
+
+        <section id="panel-apuesta" class="panel">
+            <h2>1. Elige caballo</h2>
+            <div id="botones-caballos" class="botonera"></div>
+
+            <h2>2. Elige apuesta</h2>
+            <div id="botones-apuesta" class="botonera"></div>
+
+            <button id="btn-correr" class="btn-principal" type="button" disabled>¡A correr!</button>
+        </section>
+
+        <section id="panel-resultado" class="panel" hidden>
+            <p id="mensaje" class="mensaje" role="status"></p>
+            <button id="btn-siguiente" class="btn-principal" type="button" hidden>Siguiente carrera</button>
+        </section>
+
+        <section id="panel-fin" class="panel" hidden>
+            <h2>Partida terminada</h2>
+            <p id="mensaje-final" class="mensaje"></p>
+            <form id="form-ranking" class="form-ranking">
+                <label for="nombre">Tu nombre</label>
+                <input id="nombre" type="text" maxlength="12" placeholder="Jinete anónimo" autocomplete="off">
+                <button class="btn-principal" type="submit">Guardar puntuación</button>
+            </form>
+            <button id="btn-reiniciar" class="btn-principal" type="button">Jugar de nuevo</button>
+        </section>
+
+        <section class="panel">
+            <h2>Clasificación</h2>
+            <ol id="lista-ranking" class="ranking"></ol>
+            <p id="ranking-vacio" class="nota">Aún no hay puntuaciones. Se pierden al recargar la página.</p>
+        </section>
+    </main>
+
+    <script src="logic.js"></script>
 </body>
 </html>
