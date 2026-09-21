@@ -1,11 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Practica1</title>
+    <title>Simon Dice</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="logic.js" defer></script>
 </head>
 <body>
+    <main class="game">
+        <h1>Simon Dice</h1>
 
+        <div class="scoreboard">
+            <p>Ronda: <strong id="round">0</strong></p>
+            <p>High score: <strong id="high-score">0</strong></p>
+        </div>
+
+        <p id="status" class="status" aria-live="polite">Pulsa Jugar para empezar</p>
+
+        <div id="board" class="board">
+            <button type="button" class="cell" data-index="0" aria-label="Casilla 1"></button>
+            <button type="button" class="cell" data-index="1" aria-label="Casilla 2"></button>
+            <button type="button" class="cell" data-index="2" aria-label="Casilla 3"></button>
+            <button type="button" class="cell" data-index="3" aria-label="Casilla 4"></button>
+            <button type="button" class="cell" data-index="4" aria-label="Casilla 5"></button>
+            <button type="button" class="cell" data-index="5" aria-label="Casilla 6"></button>
+            <button type="button" class="cell" data-index="6" aria-label="Casilla 7"></button>
+            <button type="button" class="cell" data-index="7" aria-label="Casilla 8"></button>
+            <button type="button" class="cell" data-index="8" aria-label="Casilla 9"></button>
+        </div>
+
+        <section id="result" class="result" hidden>
+            <h2>Has perdido</h2>
+            <p>Puntuación: <strong id="final-score">0</strong></p>
+            <p>High score: <strong id="final-high-score">0</strong></p>
+            <p id="record-message" class="record" hidden>¡Nuevo récord!</p>
+        </section>
+
+        <button type="button" id="start" class="start">Jugar</button>
+    </main>
 </body>
 </html>

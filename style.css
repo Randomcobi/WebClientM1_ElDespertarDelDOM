@@ -1,0 +1,40 @@
+.game {
+    max-width: 360px;
+    margin: 0 auto;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.cell {
+    aspect-ratio: 1;
+    border: 0;
+    opacity: 0.4;
+    cursor: pointer;
+}
+
+.cell:nth-child(1) { background: #f87171; }
+.cell:nth-child(2) { background: #fb923c; }
+.cell:nth-child(3) { background: #facc15; }
+.cell:nth-child(4) { background: #a3e635; }
+.cell:nth-child(5) { background: #34d399; }
+.cell:nth-child(6) { background: #22d3ee; }
+.cell:nth-child(7) { background: #60a5fa; }
+.cell:nth-child(8) { background: #a78bfa; }
+.cell:nth-child(9) { background: #f472b6; }
+
+.cell.active {
+    opacity: 1;
+}
+
+.cell.wrong {
+    opacity: 1;
+    background: #000;
+}
+
+[hidden] {
+    display: none;
+}
