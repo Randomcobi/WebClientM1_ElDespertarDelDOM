@@ -10,10 +10,10 @@
     --boton: #eef0f3;
     --boton-hover: #e1e4e8;
     --seleccion: #dbe7ff;
-    --pista: #eef0f3;
-    --carril: #ffffff;
-    --carril-ganador: #fff3c4;
-    --meta: #9aa1ab;
+    --pista: #2f5d34;
+    --carril: #00000030;
+    --carril-ganador: #f5c04a40;
+    --meta: #ffffff;
     --acierto: #15803d;
     --fallo: #b91c1c;
 }
@@ -30,10 +30,10 @@
     --boton: #2b2f36;
     --boton-hover: #383d46;
     --seleccion: #1e3a66;
-    --pista: #1a1d22;
-    --carril: #262a30;
-    --carril-ganador: #4a3f12;
-    --meta: #6b727c;
+    --pista: #1c3820;
+    --carril: #00000040;
+    --carril-ganador: #f5c04a40;
+    --meta: #cfd3da;
     --acierto: #4ade80;
     --fallo: #f87171;
 }
@@ -96,19 +96,29 @@ body {
 .pista {
     display: grid;
     gap: 0.5rem;
-    background: var(--pista);
+    background: var(--pista) url("grass.png") repeat;
     border: 1px solid var(--borde);
     border-radius: 0.75rem;
     padding: 0.75rem;
 }
 
 .carril {
+    position: relative;
     display: grid;
     gap: 0.15rem;
     padding: 0.25rem 0.5rem;
     border-left: 0.35rem solid var(--color);
     border-radius: 0.25rem;
     background: var(--carril);
+}
+
+.carril::after {
+    content: "";
+    position: absolute;
+    top: 0.25rem;
+    bottom: 0.25rem;
+    right: 2.5rem;
+    border-right: 0.2rem dashed var(--meta);
 }
 
 .carril.ganador {
@@ -124,7 +134,6 @@ body {
     position: relative;
     height: 2rem;
     margin-right: 2.5rem;
-    border-right: 0.2rem dashed var(--meta);
 }
 
 .corredor {
