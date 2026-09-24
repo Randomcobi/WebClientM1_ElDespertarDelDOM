@@ -1,6 +1,7 @@
 const RONDAS_TOTALES = 5;
 const MONEDAS_INICIALES = 100;
-const APUESTAS_FIJAS = [10, 25, 50];
+const PORCENTAJES_APUESTA = [0.1, 0.25, 0.5, 1];
+const REDONDEO_APUESTA = 5;
 const RACHA_MINIMA_BONUS = 2;
 const MULTIPLICADOR_RACHA = 1.5;
 const META = 100;
@@ -10,10 +11,10 @@ const MAX_RANKING = 10;
 // "ventaja" es un empujón fijo por tick: cuanto más favorito, más ventaja y menos cuota.
 // Con estos valores ganan aprox. un 35 %, 27 %, 21 % y 16 % de las carreras.
 const CABALLOS = [
-    { nombre: 'Trueno', cuota: 2.5, ventaja: 0.06, color: '#60a5fa' },
-    { nombre: 'Relámpago', cuota: 3.5, ventaja: 0.04, color: '#f472b6' },
-    { nombre: 'Bronco', cuota: 4.5, ventaja: 0.02, color: '#fbbf24' },
-    { nombre: 'Rocinante', cuota: 6, ventaja: 0, color: '#a78bfa' }
+    { nombre: 'T.M Opera O', cuota: 2.5, ventaja: 0.06, color: '#60a5fa' },
+    { nombre: 'Tokai Teio', cuota: 3.5, ventaja: 0.04, color: '#f472b6' },
+    { nombre: 'Gold Ship', cuota: 4.5, ventaja: 0.02, color: '#fbbf24' },
+    { nombre: 'Manhattan Cafe', cuota: 6, ventaja: 0, color: '#a78bfa' }
 ];
 
 const estado = {
@@ -110,29 +111,37 @@ function pintarBotonesCaballos() {
         const boton = document.createElement('button');
         boton.type = 'button';
         boton.textContent = `${caballo.nombre} (x${caballo.cuota})`;
-        boton.addEventListener('click', () => {
-            estado.caballoElegido = indice;
-            marcarSeleccion(botonesCaballos, boton);
-            actualizarBotonCorrer();
-        });
+        boton.dataset.indice = indice;
         botonesCaballos.appendChild(boton);
     });
 }
 
+function calcularCantidadesApuesta() {
+    const cantidades = [];
+
+    PORCENTAJES_APUESTA.forEach((porcentaje, indice) => {
+        const esTodo = indice === PORCENTAJES_APUESTA.length - 1;
+        const cantidad = esTodo
+            ? estado.monedas
+            : Math.max(1, Math.round((estado.monedas * porcentaje) / REDONDEO_APUESTA) * REDONDEO_APUESTA);
+
+        if (!esTodo && cantidad >= estado.monedas) return;
+        if (cantidades.includes(cantidad)) return;
+        cantidades.push(cantidad);
+    });
+
+    return cantidades;
+}
+
 function pintarBotonesApuesta() {
     botonesApuesta.replaceChildren();
-    const cantidades = APUESTAS_FIJAS.filter((cantidad) => cantidad < estado.monedas);
-    cantidades.push(estado.monedas);
+    const cantidades = calcularCantidadesApuesta();
 
     cantidades.forEach((cantidad) => {
         const boton = document.createElement('button');
         boton.type = 'button';
         boton.textContent = cantidad === estado.monedas ? `Todo (${cantidad})` : String(cantidad);
-        boton.addEventListener('click', () => {
-            estado.apuesta = cantidad;
-            marcarSeleccion(botonesApuesta, boton);
-            actualizarBotonCorrer();
-        });
+        boton.dataset.cantidad = cantidad;
         botonesApuesta.appendChild(boton);
     });
 }
@@ -246,6 +255,24 @@ btnSiguiente.addEventListener('click', () => {
 });
 btnReiniciar.addEventListener('click', reiniciarPartida);
 formRanking.addEventListener('submit', guardarPuntuacion);
+
+botonesCaballos.addEventListener('click', (evento) => {
+    const boton = evento.target.closest('button');
+    if (!boton) return;
+
+    estado.caballoElegido = Number(boton.dataset.indice);
+    marcarSeleccion(botonesCaballos, boton);
+    actualizarBotonCorrer();
+});
+
+botonesApuesta.addEventListener('click', (evento) => {
+    const boton = evento.target.closest('button');
+    if (!boton) return;
+
+    estado.apuesta = Number(boton.dataset.cantidad);
+    marcarSeleccion(botonesApuesta, boton);
+    actualizarBotonCorrer();
+});
 
 // Pulsar "B" alterna entre modo claro y oscuro (salvo si se está escribiendo en un campo).
 document.addEventListener('keydown', (evento) => {
